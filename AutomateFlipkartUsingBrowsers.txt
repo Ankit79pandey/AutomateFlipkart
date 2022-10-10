@@ -1,0 +1,194 @@
+DESCRIPTION : To automate a real-world web application
+*******************************************************
+
+------------------------------------------------------------------------
+
+Step 1:Create a Maven Project namely AutomateFlipkart.
+------------------------------------------------------------------------
+
+Step 2:Add the jar file and dependencies to the project.
+------------------------------------------------------------------------
+
+Step 3:Download the googleChromeDriver and firefoxDriver which were used            
+in the project.
+------------------------------------------------------------------------
+
+Step 4:Create a testng class called SearchProduct.java in which the code is written as given below:-
+
+package com.simplilearn.demo;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+public class SearchProduct {
+  @Test
+  public void Products() {
+	  
+	  try {
+	  
+		System.setProperty("webdriver.chrome.driver", "D:\\Selenium\\chromedriver_win32 (2)\\chromedriver.exe");
+		WebDriver driver= new ChromeDriver();
+		driver.get("https://www.flipkart.com/");
+		
+		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		
+		driver.findElement(By.cssSelector("body > div._2Sn47c > div > div > div > div > div._36HLxm.col.col-3-5 > div > form > div:nth-child(1) > input")).sendKeys("7291076677");
+		
+		driver.findElement(By.cssSelector("body > div._2Sn47c > div > div > div > div > div._36HLxm.col.col-3-5 > div > form > div:nth-child(2) > input")).sendKeys("Ankit@1108");
+		
+		driver.findElement(By.cssSelector("body > div._2Sn47c > div > div > div > div > div._36HLxm.col.col-3-5 > div > form > div._1D1L_j > button")).submit();
+		
+	
+		
+		
+				WebElement product= driver.findElement(By.name("q"));
+				product.sendKeys("Iphone13");
+				
+				WebElement button=driver.findElement(By.className("L0Z3Pu"));
+				button.submit();
+				
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				WebElement element=driver.findElement(By.xpath("//*[@id=\"container\"]/div/div[3]/div[1]/div[2]/div[25]/div/div/div/a/div[2]/div[1]/div[1]"));
+				((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",element);
+				
+				System.out.println(element.getText());
+	  }
+	  catch(Exception e) {
+		  e.printStackTrace();
+	  }
+  }
+}
+------------------------------------------------------------------------
+
+Step 5:Create a class called TestUsingFirefox.java in which the code is as given below:-
+
+package com.simplilearn.demo;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.Test;
+
+public class TestUsingFirefox {
+
+  @Test
+  public void Product() {
+	  
+	  try {
+	  
+		System.setProperty("webdriver.gecko.driver", "D:\\Selenium\\geckodriver.exe");
+		WebDriver driver= new FirefoxDriver();
+		driver.get("https://www.flipkart.com/");
+		
+		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		
+		driver.findElement(By.cssSelector("body > div._2Sn47c > div > div > div > div > div._36HLxm.col.col-3-5 > div > form > div:nth-child(1) > input")).sendKeys("7291076677");
+		
+		driver.findElement(By.cssSelector("body > div._2Sn47c > div > div > div > div > div._36HLxm.col.col-3-5 > div > form > div:nth-child(2) > input")).sendKeys("Ankit@1108");
+		
+		driver.findElement(By.cssSelector("body > div._2Sn47c > div > div > div > div > div._36HLxm.col.col-3-5 > div > form > div._1D1L_j > button")).submit();
+		
+	
+		
+		
+				WebElement product= driver.findElement(By.name("q"));
+				product.sendKeys("Iphone13");
+				
+				WebElement button=driver.findElement(By.className("L0Z3Pu"));
+				button.submit();
+				
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				WebElement element=driver.findElement(By.xpath("//*[@id=\"container\"]/div/div[3]/div[1]/div[2]/div[25]/div/div/div/a/div[2]/div[1]/div[1]"));
+				((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",element);
+				
+				System.out.println(element.getText());
+	  }
+	  catch(Exception e) {
+		  e.printStackTrace();
+	  }
+  }
+}
+------------------------------------------------------------------------
+
+Step 6:The pom.xml file for the created project is :-
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.simplilearn.demo</groupId>
+  <artifactId>AutomateFlipkart</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>AutomateFlipkart</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+     <dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>7.6.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.uncommons/reportng -->
+		<dependency>
+			<groupId>org.uncommons</groupId>
+			<artifactId>reportng</artifactId>
+			<version>1.1.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>4.1.0</version>
+			<classifier>no_aop</classifier>
+			<scope>provided</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/velocity/velocity-dep -->
+		<dependency>
+			<groupId>velocity</groupId>
+			<artifactId>velocity-dep</artifactId>
+			<version>1.4</version>
+		</dependency>
+  </dependencies>
+</project>
+------------------------------------------------------------------------
+
+Step 7:By right clicking on the project, there is an option to convert the project into testng which is used to create testng.xml which can run all the test classes simultaneously.
+------------------------------------------------------------------------
